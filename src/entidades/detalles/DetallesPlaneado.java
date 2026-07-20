@@ -20,6 +20,10 @@ public class DetallesPlaneado implements DetallesEstado {
         if (p.isBlank()) {
             throw new IllegalArgumentException("Prioridad invalida o nula.");
         }
+
+        if (!p.equals("Baja") && !p.equals("Media") && !p.equals("Alta")) {
+            throw new IllegalStateException("Solo puede ser 3 tipos, Baja, Media, o Alta");
+        }
         this.prioridad = p;
     }
 

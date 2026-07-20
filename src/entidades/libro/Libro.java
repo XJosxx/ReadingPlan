@@ -21,14 +21,14 @@ public class Libro implements Comparable<Libro> {
     }
 
     public void asignarTitulo(String t) {
-        if (t.isBlank() || t == null) {
+        if (t == null || t.isBlank()) {
             throw new IllegalArgumentException("Titulo no puede ser null");
         }
         this.titulo = t;
     }
 
     public void asignarAutor(String a) {
-        if (a.isBlank() || a == null) {
+        if (a == null || a.isBlank()) {
             throw new IllegalArgumentException("Autor no puede ser null");
         }
         this.autor = a;
@@ -42,7 +42,7 @@ public class Libro implements Comparable<Libro> {
     }
 
     public void asignarEstado(EstadoLibro est) {
-        if (estado == null) {
+        if (est == null) {
             throw new IllegalArgumentException("Estado no puede ser nulo");
         }
         this.estado = est;
@@ -52,6 +52,7 @@ public class Libro implements Comparable<Libro> {
         if (fechaInicio == null) {
             throw new IllegalArgumentException("Fecha invalida o nula.");
         }
+        this.fechaInicio = fechaInicio;
     }
 
     public void marcarComoLeido(DetallesLeido detalles) {
@@ -67,7 +68,7 @@ public class Libro implements Comparable<Libro> {
     }
 
     public void marcarComoLeyendo(DetallesLeyendo detalles) {
-        if (this.estado != EstadoLibro.LEIDO) {
+        if (this.estado != EstadoLibro.PLANEADO) {
             throw new IllegalStateException("Solo libros planeados pueden marcarse como leyendo");
         }
         this.estado = EstadoLibro.LEYENDO;
@@ -81,6 +82,11 @@ public class Libro implements Comparable<Libro> {
 
         this.estado = EstadoLibro.PLANEADO;
         this.detalles = detalles;
+    }
+
+    public void eliminarEstado() {
+        estado = null;
+        detalles = null;
     }
 
     public String getTitulo() {
