@@ -41,3 +41,6 @@ out/
 
 Planificacion.txt
 PlanImplementacion.md
+
+#Maven
+/target/
