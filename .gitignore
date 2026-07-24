@@ -44,3 +44,6 @@ PlanImplementacion.md
 
 #opencode
 .opencode/
+=======
+#Maven
+/target/
