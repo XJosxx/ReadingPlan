@@ -1,5 +1,5 @@
 package repositorio.interfazRepositorio;
 
-public interface InterfazRepositorio {
+public interface LibroDAO {
 
 }
