@@ -10,7 +10,6 @@ public class Libro implements Comparable<Libro> {
     private String autor;
     private int cantidadPaginas;
     private EstadoLibro estado;
-    private LocalDate fechaInicio;
     private DetallesEstado detalles;
 
     public Libro(String titulo, String autor, int paginas, EstadoLibro estado) throws Exception {
@@ -48,18 +47,11 @@ public class Libro implements Comparable<Libro> {
         this.estado = est;
     }
 
-    public void asignarFechaInicio(LocalDate fechaInicio) {
-        if (fechaInicio == null) {
-            throw new IllegalArgumentException("Fecha invalida o nula.");
-        }
-        this.fechaInicio = fechaInicio;
-    }
-
-    public void marcarComoLeido(DetallesLeido detalles) {
+    public void marcarComoLeido(DetallesLeido detalles1, DetallesLeyendo detalles2) {
         if (this.estado != EstadoLibro.LEYENDO) {
             throw new IllegalStateException("Solo libros leyendo pueden marcarse como leidos");
         }
-        if (!detalles.getFechaFinal().isAfter(this.fechaInicio)) {
+        if (!detalles1.getFechaFinal().isAfter(detalles2.getFechaInicio())) {
             throw new IllegalArgumentException("Fecha final debe ser posterior a fecha inicio");
         }
 
@@ -107,10 +99,6 @@ public class Libro implements Comparable<Libro> {
 
     public DetallesEstado getDetallesEstado() {
         return detalles;
-    }
-
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
     }
 
     @Override

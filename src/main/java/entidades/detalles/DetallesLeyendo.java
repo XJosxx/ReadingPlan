@@ -2,8 +2,19 @@ package entidades.detalles;
 
 import interfaz.DetallesEstado;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class DetallesLeyendo implements DetallesEstado {
+    private LocalDate fechaInicio;
     private int paginasLeidas;
+
+    public void asignarFechaInicio(LocalDate f) {
+        if (fechaInicio == null) {
+            throw new IllegalArgumentException("Fecha invalida o nula.");
+        }
+        this.fechaInicio = f;
+    }
 
     public void asignarPaginasLeidas(int p) {
         if (p < 1) {
@@ -15,5 +26,9 @@ public class DetallesLeyendo implements DetallesEstado {
 
     public int getPaginasLeidas() {
         return paginasLeidas;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
     }
 }
