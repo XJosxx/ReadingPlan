@@ -47,3 +47,6 @@ PlanImplementacion.md
 
 #Maven
 /target/
+
+#SQL
+*.sql
