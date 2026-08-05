@@ -3,7 +3,6 @@ package entidades.detalles;
 import java.time.LocalDate;
 
 import interfaz.DetallesEstado;
-import java.util.Date;
 
 public class DetallesLeido implements DetallesEstado {
     private LocalDate fechaFinal;
