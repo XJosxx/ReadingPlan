@@ -6,6 +6,7 @@ import entidades.detalles.*;
 import interfaz.DetallesEstado;
 
 public class Libro implements Comparable<Libro> {
+    private int idLibro;
     private String titulo;
     private String autor;
     private int cantidadPaginas;
@@ -47,11 +48,19 @@ public class Libro implements Comparable<Libro> {
         this.estado = est;
     }
 
-    public void marcarComoLeido(DetallesLeido detalles1, DetallesLeyendo detalles2) {
+    public void asignarIdLibro(int i) {
+        if (i < 0) {
+            throw new IllegalArgumentException("Id invalida.");
+        }
+        this.idLibro = i;
+    }
+
+    public void marcarComoLeido(DetallesLeido detalles) {
         if (this.estado != EstadoLibro.LEYENDO) {
             throw new IllegalStateException("Solo libros leyendo pueden marcarse como leidos");
         }
-        if (!detalles1.getFechaFinal().isAfter(detalles2.getFechaInicio())) {
+        DetallesLeyendo actuales = (DetallesLeyendo) this.detalles;
+        if (!detalles.getFechaFinal().isAfter(actuales.getFechaInicio())) {
             throw new IllegalArgumentException("Fecha final debe ser posterior a fecha inicio");
         }
 
@@ -99,6 +108,10 @@ public class Libro implements Comparable<Libro> {
 
     public DetallesEstado getDetallesEstado() {
         return detalles;
+    }
+
+    public int getIdLibro() {
+        return idLibro;
     }
 
     @Override
