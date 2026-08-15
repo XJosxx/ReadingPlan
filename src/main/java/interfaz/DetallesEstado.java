@@ -3,7 +3,7 @@ package interfaz;
 public interface DetallesEstado {
     default String obtenerTipo() {
         return null;
-    } // retorna "LEYENDO", "LEIDO", "PLANEADO"
+    } // retorna "LEYENDO", "LEIDO", "PLANEADO" (NINGUNO no tiene detalles), "NIGUNO"
 
     default String obtenerResumen() {
         return null;

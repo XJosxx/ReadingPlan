@@ -5,6 +5,7 @@ import entidades.detalles.*;
 public enum EstadoLibro {
     LEYENDO,
     LEIDO,
-    PLANEADO;
+    PLANEADO,
+    NINGUNO;
 
 }

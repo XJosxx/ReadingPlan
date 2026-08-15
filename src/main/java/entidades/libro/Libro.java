@@ -55,13 +55,21 @@ public class Libro implements Comparable<Libro> {
         this.idLibro = i;
     }
 
+    public void marcarComoNinguno() {
+        this.estado = EstadoLibro.NINGUNO;
+        this.detalles = null;
+    }
+
     public void marcarComoLeido(DetallesLeido detalles) {
-        if (this.estado != EstadoLibro.LEYENDO) {
-            throw new IllegalStateException("Solo libros leyendo pueden marcarse como leidos");
+        if (this.estado != EstadoLibro.LEYENDO && this.estado != EstadoLibro.PLANEADO && this.estado != EstadoLibro.NINGUNO) {
+            throw new IllegalStateException("Solo libros leyendo, planeados o sin estado pueden marcarse como leidos");
         }
-        DetallesLeyendo actuales = (DetallesLeyendo) this.detalles;
-        if (!detalles.getFechaFinal().isAfter(actuales.getFechaInicio())) {
-            throw new IllegalArgumentException("Fecha final debe ser posterior a fecha inicio");
+
+        if (this.estado == EstadoLibro.LEYENDO) {
+            DetallesLeyendo actuales = (DetallesLeyendo) this.detalles;
+            if (!detalles.getFechaFinal().isAfter(actuales.getFechaInicio())) {
+                throw new IllegalArgumentException("Fecha final debe ser posterior a fecha inicio");
+            }
         }
 
         this.estado = EstadoLibro.LEIDO;
@@ -69,8 +77,8 @@ public class Libro implements Comparable<Libro> {
     }
 
     public void marcarComoLeyendo(DetallesLeyendo detalles) {
-        if (this.estado != EstadoLibro.PLANEADO) {
-            throw new IllegalStateException("Solo libros planeados pueden marcarse como leyendo");
+        if (this.estado != EstadoLibro.PLANEADO && this.estado != EstadoLibro.NINGUNO) {
+            throw new IllegalStateException("Solo libros planeados o sin estado pueden marcarse como leyendo");
         }
         this.estado = EstadoLibro.LEYENDO;
         this.detalles = detalles;
@@ -85,10 +93,6 @@ public class Libro implements Comparable<Libro> {
         this.detalles = detalles;
     }
 
-    public void eliminarEstado() {
-        estado = null;
-        detalles = null;
-    }
 
     public String getTitulo() {
         return titulo;
